@@ -1,0 +1,14 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/lzmSDatabase?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: HIT-Q
+    password: 123456
+
+mybatis:
+  #  指定mapper映射文件的位置
+  mapper-locations: "classpath:mapper/*Mapper.xml"
+  #   配置mybatis的别名
+  type-aliases-package: org.example.entity
