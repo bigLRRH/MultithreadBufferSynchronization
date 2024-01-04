@@ -1,4 +1,4 @@
-package org.example.core.Threads.Consumer;
+package org.example.core.Consumer;
 
 public interface ZeroConsumer extends Consumer{
 }

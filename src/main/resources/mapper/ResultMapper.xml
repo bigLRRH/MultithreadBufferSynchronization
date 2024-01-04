@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.example.dao.ResultMapper">
+    <select id="getAll" resultType="org.example.entity.Result2">
+        SELECT *
+        FROM lzmtable
+    </select>
+    <!-- 插入Result -->
+    <insert id="insertResult" parameterType="org.example.entity.Result2">
+        INSERT INTO your_table_name (id, buffer_count, buffer_capacity, p1_count, p1_put_speed, p2_count, p2_get_speed,
+                                     p3_count, p3_get_speed, p4_count, p4_get_speed, InputContent, totalRunTime, bufferDataCount,
+                                     dataPutCount, dataGetCount, avgDataPs, positive, negative, zero, positiveCon, negativeCon, zeroCon)
+        VALUES (#{id}, #{buffer_count}, #{buffer_capacity}, #{p1_count}, #{p1_put_speed}, #{p2_count}, #{p2_get_speed},
+                #{p3_count}, #{p3_get_speed}, #{p4_count}, #{p4_get_speed}, #{InputContent}, #{totalRunTime}, #{bufferDataCount},
+                #{dataPutCount}, #{dataGetCount}, #{avgDataPs}, #{positive}, #{negative}, #{zero}, #{positiveCon}, #{negativeCon}, #{zeroCon})
+    </insert>
+
+</mapper>
