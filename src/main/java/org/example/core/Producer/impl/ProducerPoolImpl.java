@@ -1,37 +1,38 @@
 package org.example.core.Producer.impl;
 
-import org.example.core.Producer.impl.ProducerImpl;
+import org.example.core.Producer.ProducerPool;
 import org.example.core.common.IndexQueue;
-import org.example.core.common.impl.IndexQueueImpl;
 import org.example.core.Producer.Producer;
+import org.example.core.common.impl.PoolImpl;
 
 import java.util.Vector;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
 
-public class ProducerPoolImpl {
-    private Integer producerPoolSize;
-    private final Vector<Producer> producers;
-    private final IndexQueue canProduceProducerIndexQueue;
+public class ProducerPoolImpl extends PoolImpl<Producer> implements ProducerPool {
+    public ProducerPoolImpl(Integer producerPoolSize, Vector<Integer> speed_seconds) {
+        super(producerPoolSize, speed_seconds);
+    }
 
-    public ProducerPoolImpl(Integer producerPoolSize) {
-        this.producerPoolSize = producerPoolSize;
-        producers = new Vector<>(producerPoolSize);
-        canProduceProducerIndexQueue = new IndexQueueImpl(producerPoolSize, true);
-        for (int i = 0; i < producerPoolSize; i++) {
-            producers.add(new ProducerImpl(i));
+    protected void initPool() {
+        for (int i = 0; i < poolSize; i++) {
+            Producer producer = new ProducerImpl(i);
+            pool.add(producer);
         }
     }
 
+    protected Integer getIndex(Producer resource) {
+        return resource.getId();
+    }
+
     public Producer getProducer() {
-        Integer index = canProduceProducerIndexQueue.popIndex();
-        if (index == null) return null;
-        return producers.get(index);
+        return get();
     }
 
     public void returnProducer(Producer producer) {
-        Integer index = producer.getId();
-        if (index == null) return;
-        canProduceProducerIndexQueue.pushIndex(index);
+        returnResource(producer);
+    }
+
+    @Override
+    public IndexQueue getCanProduceProducerIndexQueue() {
+        return canUseIndexQueue;
     }
 }

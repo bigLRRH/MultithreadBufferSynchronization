@@ -4,8 +4,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/lzmSDatabase?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Shanghai
-    username: HIT-Q
-    password: 123456
+    username: root
+    password: lu187418187
 
 mybatis:
   #  指定mapper映射文件的位置
